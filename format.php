@@ -1,8 +1,8 @@
 <?php
 /**
- * Format HTML class
+ * Format class
  */
-class FormatHTML
+class Format
 {
     /*
      * @var
@@ -48,9 +48,22 @@ class FormatHTML
      * @var
      */
     private $indent_type = "\t";
-
+    
     /**
      * Process HTML
+     *
+     * <code>
+     *  $format = new Format();
+     *
+     *  // use spaces at 4 length
+     *  echo $format->process('Unformatted HTML string');
+     *
+     *  // use spaces at 2 length
+     *  echo $format->process('Unformatted HTML string', true, 2);
+     *
+     *  // use tabs
+     *  echo $format->process('Unformatted HTML string', false);
+     * </code>
      *
      * @param  string $input          HTML which is to be processed
      * @param  bool   $use_spaces     Use spaces instead of tabs
@@ -116,6 +129,19 @@ class FormatHTML
     /**
      * Fix HTML - Alias of process
      *
+     * <code>
+     *  $format = new Format();
+     *
+     *  // use spaces at 4 length
+     *  echo $format->fix('Unformatted HTML string');
+     *
+     *  // use spaces at 2 length
+     *  echo $format->fix('Unformatted HTML string', true, 2);
+     *
+     *  // use tabs
+     *  echo $format->fix('Unformatted HTML string', false);
+     * </code>
+     *
      * @param  string $input          HTML which is to be processed
      * @param  bool   $use_spaces     Use spaces instead of tabs
      * @param  int    $indent_length  Length of indent spacing
@@ -123,7 +149,34 @@ class FormatHTML
      */
     public function fix($input, $use_spaces = true, $indent_length = 4)
     {
-        return process($input, $use_spaces, $indent_length);
+        return html($input, $use_spaces, $indent_length);
+    }
+    
+    /**
+     * Static interface
+     * - Allows you to call the method witout initialising the class first
+     *
+     * <code>
+     *  $format = new Format();
+     *
+     *  // use spaces at 4 length
+     *  echo Format::HTML('Unformatted HTML string');
+     *
+     *  // use spaces at 2 length
+     *  echo Format::HTML('Unformatted HTML string', true, 2);
+     *
+     *  // use tabs
+     *  echo Format::HTML('Unformatted HTML string', false);
+     * </code>
+     *
+     * @param  string $input          HTML which is to be processed
+     * @param  bool   $use_spaces     Use spaces instead of tabs
+     * @param  int    $indent_length  Length of indent spacing
+     * @return string
+     */
+    public static function HTML($input, $use_spaces = true, $indent_length = 4)
+    {
+        return (new self)->process($input, $use_spaces, $indent_length);
     }
 
     /**
