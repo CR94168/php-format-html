@@ -1,6 +1,5 @@
-<?php
 /**
- * Format class
+ * Format HTML class
  */
 class Format
 {
@@ -50,6 +49,31 @@ class Format
     private $indent_type = "\t";
     
     /**
+     * Static interface
+     * - Allows you to call the method witout initialising the class first
+     *
+     * <code>
+     *  // use spaces at 4 length
+     *  echo Format::HTML('Unformatted HTML string');
+     *
+     *  // use spaces at 2 length
+     *  echo Format::HTML('Unformatted HTML string', true, 2);
+     *
+     *  // use tabs
+     *  echo Format::HTML('Unformatted HTML string', false);
+     * </code>
+     *
+     * @param  string $input          HTML which is to be processed
+     * @param  bool   $use_spaces     Use spaces instead of tabs
+     * @param  int    $indent_length  Length of indent spacing
+     * @return string
+     */
+    public static function HTML($input, $use_spaces = true, $indent_length = 4)
+    {
+        return (new self)->process($input, $use_spaces, $indent_length);
+    }
+    
+    /**
      * Process HTML
      *
      * <code>
@@ -70,7 +94,7 @@ class Format
      * @param  int    $indent_length  Length of indent spacing
      * @return string
      */
-    public function process($input, $use_spaces = true, $indent_length = 4)
+    private function process($input, $use_spaces = true, $indent_length = 4)
     {
         if (!is_string($input)) {
             throw new \InvalidArgumentException('1st argument must be a string');
@@ -124,59 +148,6 @@ class Format
         }
 
         return $this->output;
-    }
-    
-    /**
-     * Fix HTML - Alias of process
-     *
-     * <code>
-     *  $format = new Format();
-     *
-     *  // use spaces at 4 length
-     *  echo $format->fix('Unformatted HTML string');
-     *
-     *  // use spaces at 2 length
-     *  echo $format->fix('Unformatted HTML string', true, 2);
-     *
-     *  // use tabs
-     *  echo $format->fix('Unformatted HTML string', false);
-     * </code>
-     *
-     * @param  string $input          HTML which is to be processed
-     * @param  bool   $use_spaces     Use spaces instead of tabs
-     * @param  int    $indent_length  Length of indent spacing
-     * @return string
-     */
-    public function fix($input, $use_spaces = true, $indent_length = 4)
-    {
-        return html($input, $use_spaces, $indent_length);
-    }
-    
-    /**
-     * Static interface
-     * - Allows you to call the method witout initialising the class first
-     *
-     * <code>
-     *  $format = new Format();
-     *
-     *  // use spaces at 4 length
-     *  echo Format::HTML('Unformatted HTML string');
-     *
-     *  // use spaces at 2 length
-     *  echo Format::HTML('Unformatted HTML string', true, 2);
-     *
-     *  // use tabs
-     *  echo Format::HTML('Unformatted HTML string', false);
-     * </code>
-     *
-     * @param  string $input          HTML which is to be processed
-     * @param  bool   $use_spaces     Use spaces instead of tabs
-     * @param  int    $indent_length  Length of indent spacing
-     * @return string
-     */
-    public static function HTML($input, $use_spaces = true, $indent_length = 4)
-    {
-        return (new self)->process($input, $use_spaces, $indent_length);
     }
 
     /**
