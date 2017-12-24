@@ -16,10 +16,10 @@ A simple to use HTML prettifier class written in PHP.
     echo $format->html($html);
 
     // use spaces at 2 length
-    echo $format->html('Unformatted HTML string', true, 2);
+    echo $format->html($html, true, 2);
 
     // use tabs
-    echo $format->html('Unformatted HTML string', false);
+    echo $format->html($html, false);
 
 ### Static method example:
 
