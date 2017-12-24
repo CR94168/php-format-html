@@ -75,19 +75,19 @@ class Format
     }
     
     /**
-     * Process HTML
+     * Process/Format HTML
      *
      * <code>
      *  $format = new Format();
      *
      *  // use spaces at 4 length
-     *  echo $format->process('Unformatted HTML string');
+     *  echo $format->HTML('Unformatted HTML string');
      *
      *  // use spaces at 2 length
-     *  echo $format->process('Unformatted HTML string', true, 2);
+     *  echo $format->HTML('Unformatted HTML string', true, 2);
      *
      *  // use tabs
-     *  echo $format->process('Unformatted HTML string', false);
+     *  echo $format->HTML('Unformatted HTML string', false);
      * </code>
      *
      * @param  string $input          HTML which is to be processed
