@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Format HTML class
  */
@@ -48,7 +49,7 @@ class Format
      * @var
      */
     private $indent_type = "\t";
-    
+
     /**
      * Static interface
      * - Allows you to call the method witout initialising the class first
@@ -73,7 +74,7 @@ class Format
     {
         return (new self)->process($input, $use_spaces, $indent_length);
     }
-    
+
     /**
      * Process/Format HTML
      *
@@ -159,7 +160,7 @@ class Format
         if ($this->is_end_comment()) {
             $this->in_comment = false;
             $this->output .= '-->';
-            $this->i += 3;
+            $this->i += 2;
         } else {
             $this->output .= $this->input[$this->i];
         }
